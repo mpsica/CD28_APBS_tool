@@ -4,3 +4,5 @@
 *.dx
 map*
 io.mc
+input_structures/
+output_apbs/
