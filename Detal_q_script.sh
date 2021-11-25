@@ -17,17 +17,25 @@ This also requires the installation of pdb2pqr. Follow the instructios in:
 https://pdb2pqr.readthedocs.io/en/latest/getting.html
 
 **********************
+This script calcultes at once the APBS at pH 5 and pH 7 using the same imput 
+pdb structure, and then calcultes the difference between electrostatic portential values
+voxel-to-voxel. For that reason it is important that APBS at both pHs are calculated 
+over the same input structure.
+
+Remember to change permisions
+
+**********************
 Instructions:
 
-This script calcultes at once the APBS at pH 5 and pH 7 using the same imput 
-pdb structure.
+1) Load the pdb structures in the current working directory.
 
-Load the pdb structures in the curren working directory.
-Run the script as: 
+2) Run the script as: 
 
-	./script [protein].pdb
+	./Detal_q_script.sh [protein].pdb
 
-The output will be created in the same directory.
+3) The output file (Delta_q-[protein].dx) will be created in the same directory.
+
+4) The maps can be loaded in Pymol to the same input PDB structure.
 
 "
 }
@@ -62,7 +70,7 @@ for PROT in $1
 	echo -n "Calculating Delta charge... "
 	Rscript _func.R ${WD} ${PROT}
 
-	OUT="Delta-"${PROT}".dx"
+	OUT="Delta_q-"${PROT}".dx"
 	 head ./${PROT}.pH_5.pqr.dx -n 12 >  ${OUT}
 	 cat ./tmp                       >>  ${OUT}
 	 tail ./${PROT}.pH_5.pqr.dx -n 5 >>  ${OUT}
