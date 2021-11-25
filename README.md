@@ -34,7 +34,7 @@ Instructions:
 
 2) Run the script as: 
 
-	./Detal_q_script.sh [protein].pdb
+	./Delta_q_script.sh [protein].pdb
 
 3) The output file (Delta_q-[protein].dx) will be created in the same directory.
 
