@@ -2,6 +2,8 @@
 *.log
 *.pqr
 *.dx
+*.dat
+tmp
 map*
 io.mc
 input_structures/

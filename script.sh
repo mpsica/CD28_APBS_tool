@@ -42,6 +42,9 @@ Input pdb structures must be loaded in this directory " && exit
 # Analysis
 for PROT in $1
 	do
+	
+	[[ -f ./tmp ]]	&& rm -f  ./tmp
+
 	PROT=$(echo $PROT | sed 's/\.pdb//g')
 		for PH in 5 7 ; do 
 		pdb2pqr30 --ff=CHARMM ./${PROT}.pdb ./${PROT}.pH_${PH}.pqr  --log-level  ERROR \
@@ -50,4 +53,21 @@ for PROT in $1
 							--with-ph ${PH} --drop-water
 		apbs ./apbs_${PROT}.pH_${PH}.in --output-file=./map_${PROT}.pH_${PH}
 		done
+
+	awk 'NF=3 {print}'  ${PROT}.pH_7.pqr.dx | egrep -v "^[a-z]" > ${PROT}.pH_7.dat
+	awk 'NF=3 {print}'  ${PROT}.pH_5.pqr.dx | egrep -v "^[a-z]" > ${PROT}.pH_5.dat
+	
+	WD=$(pwd)
+
+	echo -n "Calculating Delta charge... "
+	Rscript _func.R ${WD} ${PROT}
+
+	OUT="Delta-"${PROT}".dx"
+	 head ./${PROT}.pH_5.pqr.dx -n 12 >  ${OUT}
+	 cat ./tmp                       >>  ${OUT}
+	 tail ./${PROT}.pH_5.pqr.dx -n 5 >>  ${OUT}
+	 rm  ./tmp ./${PROT}*.dat
+	 echo "Done.
+	 "
+
 done
