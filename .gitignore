@@ -1,0 +1,6 @@
+*.in
+*.log
+*.pqr
+*.dx
+map*
+io.mc
