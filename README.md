@@ -1,5 +1,10 @@
 # CD28_APBS_tool
 ### Tool to calculate Difference between APBS maps 
+
+
+[![DOI](https://zenodo.org/badge/431962403.svg)](https://zenodo.org/badge/latestdoi/431962403)
+
+
 ----------------------
 
 **Soft requirements:**
